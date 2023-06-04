@@ -41,29 +41,29 @@ func main() {
 
 	home, err := os.UserHomeDir()
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 
 	kubeconfig := filepath.Join(home, ".kube", "config")
 
 	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 
 	clientset, err := kubernetes.NewForConfig(config)
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 
 	metricsClientset, err := metricsv.NewForConfig(config)
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 
 	namespaces, err := getNamespaces(clientset)
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 
 	bars := []pterm.Bar{}
