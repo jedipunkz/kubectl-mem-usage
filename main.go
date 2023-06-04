@@ -2,7 +2,8 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"flag"
+	"log"
 	"os"
 	"path/filepath"
 
@@ -35,13 +36,14 @@ func getNamespaces(clientset *kubernetes.Clientset) (*corev1.NamespaceList, erro
 }
 
 func main() {
-	// Get current user's home directory
+	optNamespace := flag.String("n", "", "namespace")
+	flag.Parse()
+
 	home, err := os.UserHomeDir()
 	if err != nil {
 		panic(err)
 	}
 
-	// Construct path to kubeconfig file
 	kubeconfig := filepath.Join(home, ".kube", "config")
 
 	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
@@ -59,18 +61,25 @@ func main() {
 		panic(err)
 	}
 
-	// List all namespaces
 	namespaces, err := getNamespaces(clientset)
 	if err != nil {
 		panic(err)
 	}
 
 	bars := []pterm.Bar{}
-	for _, namespace := range namespaces.Items {
-		podMetrics, err := getPodMetrics(metricsClientset, namespace.Name)
+	if optNamespace == nil {
+		for _, namespace := range namespaces.Items {
+			podMetrics, err := getPodMetrics(metricsClientset, namespace.Name)
+			if err != nil {
+				log.Println(err)
+				continue
+			}
+			bars = append(bars, prepareBarData(podMetrics)...)
+		}
+	} else {
+		podMetrics, err := getPodMetrics(metricsClientset, *optNamespace)
 		if err != nil {
-			fmt.Println(err)
-			continue
+			log.Println(err)
 		}
 		bars = append(bars, prepareBarData(podMetrics)...)
 	}
