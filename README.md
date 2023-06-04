@@ -23,41 +23,46 @@ cp kubectl-mem-usage /your/bin/path
 
 ## Usage
 
+### Display pods memory usage of all namespaces
+
 ```shell
-kubectl mem usage
+$ kubectl mem usage
 
 argo-rollouts                      ██
-alertmanager                       █
-config-reloader
 nginx
+istio-proxy                        ███
+istio-proxy                        ███
 nginx
+istio-proxy                        ███
 nginx
-alertmanager                       █
-kube-state-metrics                 █
-grafana-sc-datasources             ██████
-grafana                            ██████
-grafana-sc-dashboard               ██████
-kube-prometheus-stack              █
-kube-state-metrics                 █
-node-exporter
-config-reloader
-prometheus                         █████████████████████████████████████████
-pushgateway
-prometheus-server                  █████████████████████████████
+istio-proxy                        ███
+istio-proxy                        ███
+discovery                          █████
 prometheus-server-configmap-reload
-nginx
-istio-operator                     █████████
-istio-proxy                        ███
-istio-proxy                        ███
-discovery                          ████
+prometheus-server                  ███████████████████████████████████████
 coredns                            █
 etcd                               ████████
 kube-apiserver                     ██████████████████████████████████████████████████
-kube-controller-manager            ██████
+kube-controller-manager            █████
 kube-proxy                         █
 kube-scheduler                     █
 metrics-server                     █
-storage-provisioner                █
+storage-provisioner
+```
+
+### Display pods memory usage of specific namespace
+
+```shell
+$ kubectl mem usage -n kube-system
+
+coredns                 █
+etcd                    ████████
+kube-apiserver          ██████████████████████████████████████████████████
+kube-controller-manager ██████
+kube-proxy              █
+kube-scheduler          █
+metrics-server          █
+storage-provisioner
 ```
 
 ## Author
