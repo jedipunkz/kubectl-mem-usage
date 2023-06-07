@@ -84,5 +84,5 @@ func main() {
 		bars = append(bars, prepareBarData(podMetrics)...)
 	}
 
-	pterm.DefaultBarChart.WithBars(bars).WithHorizontal().WithWidth(50).Render()
+	pterm.DefaultBarChart.WithBars(bars).WithHorizontal().WithShowValue().WithWidth(30).Render()
 }
