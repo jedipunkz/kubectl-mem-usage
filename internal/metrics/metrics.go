@@ -26,7 +26,10 @@ func PrepareBarData(podMetrics *metricsv1beta1.PodMetricsList) []pterm.Bar {
 	for _, podMetric := range podMetrics.Items {
 		for _, container := range podMetric.Containers {
 			memoryUsage := container.Usage["memory"]
-			bars = append(bars, pterm.Bar{Label: container.Name, Value: int(memoryUsage.Value())})
+			bars = append(bars, pterm.Bar{
+				Label: container.Name,
+				Value: int(memoryUsage.Value()),
+				Style: pterm.NewStyle(pterm.FgLightMagenta)})
 		}
 	}
 	return bars
