@@ -28,26 +28,27 @@ cp kubectl-mem-usage /your/bin/path
 ```shell
 $ kubectl mem usage
 
-argo-rollouts                      ██
-nginx
-istio-proxy                        ███
-istio-proxy                        ███
-nginx
-istio-proxy                        ███
-nginx
-istio-proxy                        ███
-istio-proxy                        ███
-discovery                          █████
-prometheus-server-configmap-reload
-prometheus-server                  ███████████████████████████████████████
-coredns                            █
-etcd                               ████████
-kube-apiserver                     ██████████████████████████████████████████████████
-kube-controller-manager            █████
-kube-proxy                         █
-kube-scheduler                     █
-metrics-server                     █
-storage-provisioner
+argo-rollouts                      ██                              71667712
+nginx                                                              6303744
+istio-proxy                        █                               40837120
+istio-proxy                        █                               40820736
+nginx                                                              11440128
+istio-proxy                        █                               41873408
+nginx                                                              12877824
+istio-operator                     ████                            136933376
+istio-proxy                        █                               39366656
+istio-proxy                        ████                            115707904
+discovery                          ████                            118132736
+prometheus-server                  ██████████████████████████████  829476864
+prometheus-server-configmap-reload                                 9961472
+coredns                            ██                              58937344
+etcd                               ██████████████                  388603904
+kube-apiserver                     ██████████████████████          612376576
+kube-controller-manager            █████                           138285056
+kube-proxy                         █                               54198272
+kube-scheduler                     ██                              59260928
+metrics-server                                                     22220800
+storage-provisioner                                                13029376
 ```
 
 ### Display pods memory usage of specific namespace
@@ -55,14 +56,14 @@ storage-provisioner
 ```shell
 $ kubectl mem usage -n kube-system
 
-coredns                 █
-etcd                    ████████
-kube-apiserver          ██████████████████████████████████████████████████
-kube-controller-manager ██████
-kube-proxy              █
-kube-scheduler          █
-metrics-server          █
-storage-provisioner
+coredns                 ██                              58941440
+etcd                    ███████████████████             389341184
+kube-apiserver          ██████████████████████████████  609923072
+kube-controller-manager ██████                          131575808
+kube-proxy              ██                              54202368
+kube-scheduler          ██                              59265024
+metrics-server          █                               22208512
+storage-provisioner                                     12922880
 ```
 
 ## Author
